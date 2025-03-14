@@ -1,0 +1,52 @@
+# General configuration of example
+
+# Defined the number of workers processes
+worker_processes auto;
+
+# Defines the number of simultaneous events the Nginx process can handle at the same time
+events {
+
+    worker_connections 1024;
+
+}
+
+http {
+
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+
+    # First Virtual Host
+    server {
+
+        listen 80;
+        server_name one.example.com;
+
+        location / {
+
+            proxy_pass http://localhost:8080;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+
+        }
+
+    }
+
+    # Second Virtual Host
+    server {
+
+        listen 80;
+        server_name two.example.com;
+
+        location / {
+
+            proxy_pass http://localhost:3000;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+        }
+
+    }
+
+	# Sending optimized of archives
+	sendfile on;
+
+}

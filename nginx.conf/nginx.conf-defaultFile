@@ -1,0 +1,42 @@
+# If no other template is specified, Nginx uses this one as the default
+
+# Defiend the user who executes processes
+user  nginx;
+
+worker_processes  auto;
+
+# Defined the path for error logs
+error_log  /var/log/nginx/error.log notice;
+
+pid        /var/run/nginx.pid;
+
+
+events {
+
+    worker_connections  1024;
+
+}
+
+
+http {
+
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    keepalive_timeout  65; # In seconds
+
+    #gzip  on;
+	
+    # Includes the server configuration templates
+    include /etc/nginx/conf.d/*.conf;
+
+}
