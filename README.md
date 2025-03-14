@@ -1,1 +1,1 @@
-# nginx-config_example_virtual_hosts
+# Example of Configurantion Nginx with virtual_hosts
