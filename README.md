@@ -15,7 +15,11 @@ This is the file that is automatically generated. If we do not specify another d
 This is an example of configuring an Nginx with two virtual_hosts.
 
 - server_name one.example.com;
-- server_name two.example.com;
+- server_name two.example.com.
+
+### nginx.conf-certificateSsl
+
+This is an example of configuring the Nginx server with certificate SSL in the virtual_host.
 
 ## Next Steps
 

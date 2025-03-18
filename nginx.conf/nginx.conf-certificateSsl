@@ -1,0 +1,30 @@
+# Configuration to use certificate SSL in Nginx
+
+server {
+
+	listen 443;
+	server_name example.com;
+
+	ssl_certificate /etc/nginx/ssl/nginx.crt;
+	ssl_certificate_key etc/nginx/ssl/nginx.key;
+
+	location /{
+		
+	proxy_pass http://localhost:3000;
+
+	}
+
+}
+
+# Redirect to port 443 requests makes in port 80
+
+server {
+
+	listen 80;
+	server_name example.com;
+	return 301 https://$host$request_uri;
+
+}
+
+# $host is the variable Host of header HTTP
+# $request_uri are the parameters of request
