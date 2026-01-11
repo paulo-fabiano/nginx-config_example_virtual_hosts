@@ -1,0 +1,24 @@
+events {
+    worker_connections 1024;
+}
+
+http {
+  
+    upstream paulofabiano {
+        server paulofabiano01:8080 weight=3;
+        server paulofabiano02:8080;
+        server paulofabiano03:8080;
+    }
+
+    server {
+    
+        listen 80;
+        server_name paulofabiano.com.br;
+
+        location / {
+            proxy_pass http://paulofabiano;
+        }
+    
+    }
+
+}
